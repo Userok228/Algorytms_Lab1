@@ -12,3 +12,4 @@ C:\Users\makro\source\repos 3\2\Algorytms\Lab_1\Lab_1\obj\Debug\net9.0\refint\La
 C:\Users\makro\source\repos 3\2\Algorytms\Lab_1\Lab_1\obj\Debug\net9.0\Lab_1.pdb
 C:\Users\makro\source\repos 3\2\Algorytms\Lab_1\Lab_1\obj\Debug\net9.0\Lab_1.genruntimeconfig.cache
 C:\Users\makro\source\repos 3\2\Algorytms\Lab_1\Lab_1\obj\Debug\net9.0\ref\Lab_1.dll
+C:\Users\makro\source\repos 3\2\Algorytms\Lab_1\Lab_1\obj\Debug\net9.0\Lab_1.sourcelink.json

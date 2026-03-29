@@ -38,8 +38,7 @@
               "RelativeToolTip": "Lab_1\\DelRow.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-23T13:49:16.149Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-23T13:49:16.149Z"
             },
             {
               "$type": "Document",
@@ -51,8 +50,7 @@
               "RelativeToolTip": "Lab_1\\DelElRow.cs",
               "ViewState": "AgIAAAQAAAAAAAAAAAAqwBcAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-23T13:44:50.642Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-23T13:44:50.642Z"
             },
             {
               "$type": "Document",
@@ -60,9 +58,9 @@
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\makro\\source\\repos 3\\2\\Algorytms\\Lab_1\\Lab_1\\Program.cs",
               "RelativeDocumentMoniker": "Lab_1\\Program.cs",
-              "ToolTip": "C:\\Users\\makro\\source\\repos 3\\2\\Algorytms\\Lab_1\\Lab_1\\Program.cs*",
-              "RelativeToolTip": "Lab_1\\Program.cs*",
-              "ViewState": "AgIAADUCAAAAAAAAAAAAAFMCAAA0AAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\makro\\source\\repos 3\\2\\Algorytms\\Lab_1\\Lab_1\\Program.cs",
+              "RelativeToolTip": "Lab_1\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-15T08:59:16.675Z",
               "EditorCaption": ""

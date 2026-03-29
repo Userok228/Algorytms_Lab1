@@ -1,4 +1,5 @@
 ﻿using Lab_1;
+using System;
 
 try
 {
@@ -28,20 +29,40 @@ try
 
                     (colN, rowN, matrixA, isSquare) = AutoInputMatrix(input1, colN, rowN, matrixA, isSquare);
 
-                    Console.WriteLine("Введена матриця:");
+                    Console.WriteLine("\n----------Початкова симплекс-таблиця----------");
                     ShowMatrix(matrixA, rowN, colN);
 
+                    bool protocol = false;
+                    Console.WriteLine("\nВивести протокол обчислень? (Y або 1 щоб погодитись)");
+                    string proto = Console.ReadLine();
+
+                    if (proto == "1" || proto == "y" || proto == "Y")
+                        protocol = true;
+
+                    int step = 0;
                     double[,] processedMatrixA = matrixA;
                     for (int rs = 0; rs < rowN && rs < colN; rs++)
                     {
+                        if (protocol)
+                            Console.WriteLine("\nРозв'язувальний елемент: " + matrixA[rs, rs] + "(рядок: " + (rs + 1) + " стовпчик: " + (rs + 1) + ")");
                         (processedMatrixA, rank) = ZhordanStep(matrixA, rowN, colN, rs, rs, rank);
+
+                        if (protocol)
+                        {
+                            step++;
+                            Console.WriteLine("\nМатриця після " + step + " кроку ЗЖВ:");
+                            ShowMatrix(processedMatrixA, rowN, colN);
+                            Console.WriteLine("Оновлений ранг матриці: " + rank);
+                        }
 
                     }
 
                     if (isSquare) // обчислення розв'язку системи рівнянь можливе лише для квадратної матриці, тому якщо матриця не квадратна, виводимо відповідне повідомлення і не виконуємо подальші обчислення
                     {
-                        Console.WriteLine("Обернена матриця:");
+                        Console.WriteLine("\n----------Обернена матриця----------");
+
                         ShowMatrix(processedMatrixA, rowN, colN);
+
                         Console.WriteLine("Ранг введеної матриці: " + rank);
 
                         Console.WriteLine("\nВведіть матрицю B:");
@@ -52,15 +73,43 @@ try
                             string input = Console.ReadLine();
                             matrixB[i] = Convert.ToDouble(input);
                         }
-                        double[] solutions = SolutionCalcA(processedMatrixA, matrixB);
-                        Console.WriteLine("\nРозв'язки системи рівнянь^");
-                        ShowSolutionsA(solutions);
+
+                        int n = matrixB.Length;
+                        double[] solutions = new double[n];
+                        if (protocol)
+                        {
+                            Console.WriteLine("\n----------Пошук розв'язків системи рівнянь----------");
+                        }
+                        for (int i = 0; i < n; i++)
+                        {
+                            if (protocol)
+                                Console.Write("X" + i + " = ");
+                            for (int j = 0; j < n; j++)
+                            {
+                                if (protocol)
+                                {
+                                    if (j > 0)
+                                        Console.Write(" + ");
+                                    Console.Write(Math.Round(matrixB[j], 3) + " * " + Math.Round(matrixA[i, j], 3));
+                                }
+                                solutions[i] += matrixB[j] * matrixA[i, j]; // для пошуку X-ів, перемножуємо кожен елемент рядка оберненої матриці на відповідний елемент матриці B і сумуємо отримані добутки
+                            }
+                            if (protocol)
+                                Console.WriteLine(" = " + solutions[i]);
+                        }
+
+                        if (!protocol)
+                        {
+                            Console.WriteLine("\nРозв'язки системи рівнянь:");
+                            ShowSolutionsA(solutions);
+                        }
                     }
                     else
                     {
                         Console.WriteLine("Ранг введеної матриці: " + rank);
                         Console.WriteLine("Матриця не є квадратною, подальші обчислення не можуть бути виконані.");
                     }
+                    Console.WriteLine();
                 }
                 break;
             case "2":
@@ -93,7 +142,7 @@ try
                     string[] inputZ = Console.ReadLine().Split(' ');
                     double[] matrixZ = new double[colN + 1];
 
-                    // При пошуку мінімуму функції, всі коефіцієнти цільової функції змінюються на протилежні, тому якщо користувач вибрав мінімізацію, то всі коефіцієнти цільової функції змінюються на протилежні
+                    // При пошуку мінімуму функції, всі коефіцієнти цільової функції змінюються на протилежні
                     if (func == "2")
                     {
                         for (int i = 0; i < colN; i++)
@@ -135,8 +184,42 @@ try
                         left[i] = (i + 1) * (-1);
                     }
 
-                    Console.WriteLine("\nВведена сновна матриця:");
+                    Console.WriteLine("\n----------Вхідні параметри----------");
+                    Console.Write("\nZ = ");
+                    for (int i = 0; i < matrixZ.Length - 1; i++)
+                    {
+                        if (matrixZ[i] >= 0)
+                        {
+                            if (i > 0)
+                                Console.Write("+" + matrixZ[i]);
+                            else
+                                Console.Write(matrixZ[i]);
+
+                        }
+                        else
+                            Console.Write(matrixZ[i]);
+                        if (i + 2 == matrixZ.Length)
+                        {
+                            Console.Write(" -> ");
+                            if (func == "1")
+                                Console.Write("max");
+                            else
+                                Console.Write("min");
+                        }
+                    }
+                    Console.WriteLine("\n\nПочаткова симплекс-таблиця:");
                     ShowMatrix(matrixMain, rowN + 1, colN + 1);
+
+                    bool protocol = false;
+                    Console.WriteLine("\nВивести протокол обчислень? (Y або 1 щоб погодитись)");
+                    string proto = Console.ReadLine();
+
+                    if (proto == "1" || proto == "y" || proto == "Y")
+                        protocol = true;
+
+                    if (protocol)
+                        Console.WriteLine("----------Пошук опорного розв'язку----------\n");
+
                     bool hasNegative = true;
                     bool stepResult = true;
                     for (int i = 0; i < rowN; i++)
@@ -150,23 +233,35 @@ try
                                 {
                                     int processedRow;
 
-                                    // Усунення мінусів в одинарному рядку за допомогою МЖВ для пошуку опорного розв'язку
+                                    // Усунення мінусів в одинарному стовпчику за допомогою МЖВ для пошуку опорного розв'язку
                                     (stepResult, processedRow) = SolutionStepBC(matrixMain, rowN, colN, i, j);
                                     hasNegative = true;
                                     if (!stepResult)
                                     {
-                                        Console.WriteLine("\nОпорний розв'язок відсутній: обчислюваний рядок при пошуку опорного розв'язку не було знайдено.");
+                                        Console.WriteLine("\nОпорний розв'язок відсутній: відсутні додатні добутки при знаходженні найменьшого невід'ємного добутку елементів результуючого та одинарного стовпчиків.");
                                         break;
                                     }
                                     else
                                     {
+                                        if (protocol)
+                                        {
+                                            Console.WriteLine("Актуальна симплекс-таблиця:");
+                                            ShowMatrix(matrixMain, rowN + 1, colN + 1);
+                                            Console.WriteLine("Розв'язувальний елемент: " + matrixMain[processedRow, j] + "(рядок " + (processedRow + 1) + ", стовпчик " + (j + 1) + ")");
+                                        }
+
                                         matrixMain = StepMZHV(matrixMain, rowN + 1, colN + 1, processedRow, j);
+
+                                        if (protocol)
+                                        {
+                                            Console.WriteLine("\nМатриця після  кроку МЖВ:");
+                                            ShowMatrix(matrixMain, rowN + 1, colN + 1);
+                                        }
+
                                         int tempLeft = left[i];
                                         int tempUp = up[j];
                                         left[i] = tempUp;
                                         up[j] = tempLeft;
-
-
                                     }
 
                                     break;
@@ -188,11 +283,14 @@ try
                         break;
                     }
 
-                    Console.WriteLine("\nМатриця після пошуку опорного розв'язку: ");
+                    Console.WriteLine("----------------------------------------\nМатриця після пошуку опорного розв'язку: ");
                     ShowMatrix(matrixMain, rowN + 1, colN + 1);
 
-                    Console.WriteLine("\nОпорний розв'язок:");
+                    Console.WriteLine("Опорний розв'язок:");
                     ShowSolutionsBC(matrixMain, left, x, colN);
+
+                    if (protocol)
+                        Console.WriteLine("\n----------Пошук оптимального розв'язку----------\n");
 
                     for (int j = 0; j < colN + 1; j++)
                     {
@@ -200,16 +298,28 @@ try
                         {
                             int processedRow;
                             (stepResult, processedRow) = SolutionStepBC(matrixMain, rowN, colN, rowN, j);
-
-                            hasNegative = true;
                             if (!stepResult)
                             {
-                                Console.WriteLine("\nОптимальний розв'язок відсутній: обчислюваний рядок при пошуку оптимального розв'язку не було знайдено.");
+                                Console.WriteLine("\nОптимальний розв'язок відсутній: відсутні додатні добутки при знаходженні найменьшого невід'ємного добутку елементів результуючого та одинарного стовпчиків.");
                                 break;
                             }
                             else
                             {
+                                if (protocol)
+                                {
+                                    Console.WriteLine("Актуальна симплекс-таблиця:");
+                                    ShowMatrix(matrixMain, rowN + 1, colN + 1);
+                                    Console.WriteLine("Розв'язувальний елемент: " + matrixMain[processedRow, j] + "(рядок " + (processedRow + 1) + ", стовпчик " + (j + 1) + ")");
+                                }
+
                                 matrixMain = StepMZHV(matrixMain, rowN + 1, colN + 1, processedRow, j);
+
+                                if (protocol)
+                                {
+                                    Console.WriteLine("\nМатриця після  кроку МЖВ:");
+                                    ShowMatrix(matrixMain, rowN + 1, colN + 1);
+                                }
+
                                 int tempLeft = left[processedRow];
                                 int tempUp = up[j];
                                 left[processedRow] = tempUp;
@@ -222,9 +332,9 @@ try
                     {
                         break;
                     }
-                    Console.WriteLine("\nМатриця після пошуку оптимального розв'язку: ");
+                    Console.WriteLine("----------------------------------------\nМатриця після пошуку оптимального розв'язку: ");
                     ShowMatrix(matrixMain, rowN + 1, colN + 1);
-                    Console.WriteLine("\nОптимальний розв'язок:");
+                    Console.WriteLine("Оптимальний розв'язок:");
                     ShowSolutionsBC(matrixMain, left, x, colN);
 
                     Console.WriteLine();
@@ -241,7 +351,7 @@ try
             case "3":
                 {
 
-                    Console.WriteLine("\nВедіть матрицю A (щоб завершити введення матриці - введіть порожній рядок):");
+                    Console.WriteLine("\nВведіть матрицю A (щоб завершити введення матриці - введіть порожній рядок):");
                     string[] input1 = Console.ReadLine().Split(' ');
 
                     int colN = input1.Length;
@@ -268,11 +378,13 @@ try
                         inputEq = Console.ReadLine().Split(' ');
                     }
                     int[] eqRows = new int[inputEq.Length];
+                    bool eq = false;
                     for (int i = 0; i < inputEq.Length; i++)
                     {
                         if (inputEq[i] != "")
                         {
                             eqRows[i] = Convert.ToInt32(inputEq[i]);
+                            eq = true;
                         }
                         else
                         {
@@ -280,6 +392,8 @@ try
                             break;
                         }
                     }
+
+
                     Console.WriteLine("\nОберіть задачу: \n1) Максимізація цільової функції\n2) Мінімізація цільової функції");
                     string func = Console.ReadLine();
                     while (func != "1" && func != "2")
@@ -321,9 +435,20 @@ try
                     {
                         matrixMain[rowN, j] = -matrixZ[j];
                     }
-                    Console.WriteLine("\nВведена основна матриця:");
-                    ShowMatrix(matrixMain, rowN + 1, colN + 1);
 
+                    // зміна знаків у нульових рядках
+                    if (eq)
+                        for (int i = 0; i < rowN; i++)
+                        {
+                            for (int k = 0; k < eqRows.Length; k++)
+                            {
+                                if (eqRows[k] == (i + 1))
+                                    for (int j = 0; j < colN+1; j++)
+                                    {
+                                        matrixMain[i, j] = -matrixMain[i, j];
+                                    }
+                            }
+                        }
                     //Створення масивів для збереження індексів X-ів та Y-ів (X-и більше нуля, Y-и - меньше), а також нульових рядків (рядки з рівністю)
                     int[] left = new int[rowN];
                     int[] up = new int[colN];
@@ -345,7 +470,7 @@ try
                         }
                     }
 
-                    Console.WriteLine("Введіть (через пробіл) номери вільних X-ів (Якщо таких немає - введіть порожній рядок): ");
+                    Console.WriteLine("\nВведіть (через пробіл) номери вільних X-ів (Якщо таких немає - введіть порожній рядок): ");
                     bool free = false;
                     DelRow[] delRows = new DelRow[colN];
                     for (int i = 0; i < colN; i++)
@@ -360,6 +485,70 @@ try
                         inputFree = Console.ReadLine().Split(' ');
                     }
                     if (inputFree[0] != "")
+                        free = true;
+
+                    Console.WriteLine("----------Вхідні параметри----------");
+                    Console.Write("\nZ = ");
+                    for (int i = 0; i < matrixZ.Length - 1; i++)
+                    {
+                        if (matrixZ[i] >= 0)
+                        {
+                            if (i > 0)
+                                Console.Write("+" + matrixZ[i]);
+                            else
+                                Console.Write(matrixZ[i]);
+
+                        }
+                        else
+                            Console.Write(matrixZ[i]);
+                        if (i + 2 == matrixZ.Length)
+                        {
+                            Console.Write(" -> ");
+                            if (func == "1")
+                                Console.Write("max");
+                            else
+                                Console.Write("min");
+                        }
+                    }
+                    Console.WriteLine("\n\nПочаткова симплекс-таблиця:");
+                    ShowMatrix(matrixMain, rowN + 1, colN + 1);
+
+                    Console.Write("Вільні X-и: ");
+                    if (!free)
+                        Console.WriteLine("відсутні.");
+                    else
+                        for (int i = 0; i < inputFree.Length; i++)
+                        {
+                            Console.Write("X" + inputFree[i]);
+                            if (i < inputFree.Length - 1)
+                                Console.Write(", ");
+                            else Console.WriteLine(".");
+                        }
+                    Console.Write("Нульові рядки: ");
+                    if (!eq)
+                        Console.WriteLine("відсутні.");
+                    else
+                        for (int i = 0; i < inputEq.Length; i++)
+                        {
+                            Console.Write(inputEq[i]);
+                            if (i < inputEq.Length - 1)
+                                Console.Write(", ");
+                            else Console.WriteLine(".");
+                        }
+
+                    bool protocol = false;
+                    Console.WriteLine("\nВивести протокол обчислень? (Y або 1 щоб погодитись)");
+                    string proto = Console.ReadLine();
+
+                    if (proto == "1" || proto == "y" || proto == "Y")
+                        protocol = true;
+
+                    if (protocol && free)
+                    {
+                        Console.WriteLine("\n----------Видалення вільних змінних----------");
+                    }
+
+                    if (free)
                     {
                         free = true;
                         int[] freeX = new int[inputFree.Length];
@@ -374,10 +563,19 @@ try
                             {
                                 if (Math.Round(matrixMain[i, xIndex - 1], 6) != 0)// Перший ненульовий елемент у стовпчику з вільним x-ом
                                 {
+                                    if (protocol)
+                                    {
+                                        Console.WriteLine("Актуальна симплекс-таблиця:");
+                                        ShowMatrix(matrixMain, rowN + 1, colN + 1);
+                                        Console.WriteLine("Розв'язувальний елемент: " + matrixMain[i, xIndex - 1] + "(рядок " + (i + 1) + ", стовпчик " + (xIndex) + ")");
+                                    }
                                     matrixMain = StepMZHV(matrixMain, rowN + 1, colN + 1, i, xIndex - 1);
-                                   // Console.WriteLine("\nМатриця після  кроку МЖВ");
-                                    //ShowMatrix(matrixMain, rowN + 1, colN + 1);
 
+                                    if (protocol)
+                                    {
+                                        Console.WriteLine("\nМатриця після  кроку МЖВ");
+                                        ShowMatrix(matrixMain, rowN + 1, colN + 1);
+                                    }
 
                                     // Зміна X-ів та Y-ів після виконання МЖВ
                                     int tempLeft = left[i];
@@ -421,8 +619,11 @@ try
                                             }
 
                                             (rowN, matrixMain) = DeleteRow(matrixMain, rowN, colN, i);
-                                           // Console.WriteLine("\nМатриця після видалення рядка:");
-                                            //ShowMatrix(matrixMain, rowN + 1, colN + 1);
+                                            if (protocol)
+                                            {
+                                                Console.WriteLine("Матриця після видалення рядка:");
+                                                ShowMatrix(matrixMain, rowN + 1, colN + 1);
+                                            }
                                             int[] tempL = new int[rowN];
                                             for (int l = 0; l < rowN; l++)
                                             {
@@ -447,13 +648,19 @@ try
                                 }
                             }
                         }
+                    }
 
-
-
+                    if (free)
+                    {
+                        Console.WriteLine("----------------------------------------\nМатриця після видалення вільних змінних:");
+                        ShowMatrix(matrixMain, rowN + 1, colN + 1);
                     }
 
                     bool stepResult = true;
                     bool positive = true;
+
+                    if (protocol && eq)
+                        Console.WriteLine("\n----------Видалення нульових рядків----------\n");
                     for (int i = 0; i < rowN; i++)
                     {
                         if (left[i] == 0)
@@ -465,12 +672,28 @@ try
                                 {
                                     int processedRow;
                                     (stepResult, processedRow) = SolutionStepBC(matrixMain, rowN, colN, i, j);
+                                    if (!stepResult)
+                                        break;
+                                    if (protocol)
+                                    {
+                                        Console.WriteLine("Актуальна симплекс-таблиця:");
+                                        ShowMatrix(matrixMain, rowN + 1, colN + 1);
+                                        Console.WriteLine("Розв'язувальний елемент: " + matrixMain[processedRow, j] + "(рядок " + (processedRow + 1) + ", стовпчик " + (j + 1) + ")");
+                                    }
 
                                     matrixMain = StepMZHV(matrixMain, rowN + 1, colN + 1, processedRow, j);
+
+                                    if (protocol)
+                                    {
+                                        Console.WriteLine("\nМатриця після  кроку МЖВ:");
+                                        ShowMatrix(matrixMain, rowN + 1, colN + 1);
+                                    }
+
                                     int tempLeft = left[processedRow];
                                     int tempUp = up[j];
                                     left[processedRow] = tempUp;
                                     up[j] = tempLeft;
+
                                     // Зміна x-ів та y-ів після виконання МЖВ
                                     if (up[j] == 0)
                                     {
@@ -495,7 +718,11 @@ try
                                                 break;
                                             }
                                         }
-                                       // ShowMatrix(matrixMain, rowN + 1, colN + 1);
+                                        if (protocol)
+                                        {
+                                            Console.WriteLine("Матриця після видалення стовпчика:");
+                                            ShowMatrix(matrixMain, rowN + 1, colN + 1);
+                                        }
                                     }
                                     positive = true;
                                     i = -1;
@@ -519,11 +746,17 @@ try
                     }
                     if (!stepResult)
                     {
-                        Console.WriteLine("\nНеможливо видалити нульовий рядок: обчислюваний рядок, при видаленні нульових рядків, не було знайдено.");
+                        Console.WriteLine("\nНеможливо видалити нульовий рядок: відсутні додатні добутки при знаходженні найменьшого невід'ємного добутку елементів результуючого та одинарного стовпчиків.");
                         break;
                     }
-                    Console.WriteLine("\nМатриця після видалення нульових рядків: ");
-                    ShowMatrix(matrixMain, rowN + 1, colN + 1);
+                    if (eq)
+                    {
+                        Console.WriteLine("----------------------------------------\nМатриця після видалення всіх нульових рядків: ");
+                        ShowMatrix(matrixMain, rowN + 1, colN + 1);
+                    }
+
+                    if (protocol)
+                        Console.WriteLine("----------Пошук опорного розв'язку----------\n");
 
                     bool hasNegative = true;
                     for (int i = 0; i < rowN; i++)
@@ -542,12 +775,24 @@ try
                                     hasNegative = true;
                                     if (!stepResult)
                                     {
-                                        Console.WriteLine("\nОпорний розв'язок відсутній: обчислюваний рядок при пошуку опорного розв'язку не було знайдено.");
                                         break;
                                     }
                                     else
                                     {
+                                        if (protocol)
+                                        {
+                                            Console.WriteLine("Актуальна симплекс-таблиця:");
+                                            ShowMatrix(matrixMain, rowN + 1, colN + 1);
+                                            Console.WriteLine("Розв'язувальний елемент: " + matrixMain[processedRow, j] + "(рядок " + (processedRow + 1) + ", стовпчик " + (j + 1) + ")");
+                                        }
+
                                         matrixMain = StepMZHV(matrixMain, rowN + 1, colN + 1, processedRow, j);
+
+                                        if (protocol)
+                                        {
+                                            Console.WriteLine("\nМатриця після  кроку МЖВ:");
+                                            ShowMatrix(matrixMain, rowN + 1, colN + 1);
+                                        }
                                         int tempLeft = left[i];
                                         int tempUp = up[j];
                                         left[i] = tempUp;
@@ -568,14 +813,18 @@ try
                         }
                     }
                     if (!stepResult)
+                    {
+                        Console.WriteLine("\nОпорний розв'язок не знайдено: відсутні додатні добутки при знаходженні найменьшого невід'ємного добутку елементів результуючого та одинарного стовпчиків.");
                         break;
+                    }
+
                     if (!hasNegative)
                     {
                         Console.WriteLine("\nНемає розв'язків: в одинарному стовпчику є від'ємні елементи при відсутніх від'ємних елементах у відповідних рядках матриці.");
                         break;
                     }
 
-                    Console.WriteLine("Матриця після пошуку опорного розв'язку: ");
+                    Console.WriteLine("----------------------------------------\nМатриця після пошуку опорного розв'язку: ");
                     ShowMatrix(matrixMain, rowN + 1, colN + 1);
 
                     Console.WriteLine("Опорний розв'язок:");
@@ -597,9 +846,10 @@ try
                         }
                     }
 
-                    Console.WriteLine();
+                    if (protocol)
+                        Console.WriteLine("\n----------Пошук оптимального розв'язку----------\n");
 
-                    for (int j = 0; j < colN + 1; j++)
+                    for (int j = 0; j < colN; j++)
                     {
                         if (matrixMain[rowN, j] < 0)
                         {
@@ -609,12 +859,22 @@ try
                             hasNegative = true;
                             if (!stepResult)
                             {
-                                Console.WriteLine("\nОптимальний розв'язок відсутній: обчислюваний рядок при пошуку оптимального розв'язку не було знайдено.");
                                 break;
                             }
                             else
                             {
+                                if (protocol)
+                                {
+                                    Console.WriteLine("Актуальна симплекс-таблиця:");
+                                    ShowMatrix(matrixMain, rowN + 1, colN + 1);
+                                    Console.WriteLine("Розв'язувальний елемент: " + matrixMain[processedRow, j] + "(рядок " + (processedRow + 1) + ", стовпчик " + (j + 1) + ")");
+                                }
                                 matrixMain = StepMZHV(matrixMain, rowN + 1, colN + 1, processedRow, j);
+                                if (protocol)
+                                {
+                                    Console.WriteLine("\nМатриця після  кроку МЖВ:");
+                                    ShowMatrix(matrixMain, rowN + 1, colN + 1);
+                                }
                                 int tempLeft = left[processedRow];
                                 int tempUp = up[j];
                                 left[processedRow] = tempUp;
@@ -625,9 +885,10 @@ try
                     }
                     if (!stepResult)
                     {
+                        Console.WriteLine("\nОптимальний розв'язок не знайдено: відсутні додатні добутки при знаходженні найменьшого невід'ємного добутку елементів результуючого та одинарного стовпчиків.");
                         break;
                     }
-                    Console.WriteLine("Матриця після пошуку оптимального розв'язку: ");
+                    Console.WriteLine("----------------------------------------\nМатриця після пошуку оптимального розв'язку: ");
                     ShowMatrix(matrixMain, rowN + 1, colN + 1);
                     Console.WriteLine("Оптимальний розв'язок:");
                     if (!free)
@@ -767,7 +1028,7 @@ try
             {
                 for (int j = 0; j < colN; j++)
                 {
-                    outputMatrix[i, j] = outputMatrix[i, j] / ars; // ділимо всі елементи на розв'язувальний елемент
+                    outputMatrix[i, j] = outputMatrix[i, j] / ars; // Ділимо всі елементи на розв'язувальний елемент
                 }
             }
 
@@ -789,20 +1050,6 @@ try
             Console.WriteLine();
         }
         Console.WriteLine();
-    }
-
-    double[] SolutionCalcA(double[,] matrixA, double[] matrixB)
-    {
-        int n = matrixB.Length;
-        double[] solutions = new double[n];
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < n; j++)
-            {
-                solutions[i] += matrixB[j] * matrixA[i, j]; // для пошуку X-ів, перемножуємо кожен елемент рядка оберненої матриці на відповідний елемент матриці B і сумуємо отримані добутки
-            }
-        }
-        return solutions;
     }
 
     void ShowSolutionsA(double[] matrix)

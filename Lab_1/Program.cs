@@ -227,7 +227,7 @@ try
                         if (matrixMain[i, colN] < 0)
                         {
                             hasNegative = false;
-                            for (int j = 0; j < colN + 1; j++)
+                            for (int j = 0; j < colN; j++)
                             {
                                 if (matrixMain[i, j] < 0)
                                 {
@@ -271,7 +271,8 @@ try
                                     break;
                                 }
                             }
-
+                            if (!hasNegative)
+                                break;
                             i = -1;
                         }
                     }
@@ -292,7 +293,7 @@ try
                     if (protocol)
                         Console.WriteLine("\n----------Пошук оптимального розв'язку----------\n");
 
-                    for (int j = 0; j < colN + 1; j++)
+                    for (int j = 0; j < colN; j++)
                     {
                         if (matrixMain[rowN, j] < 0)
                         {
@@ -443,7 +444,7 @@ try
                             for (int k = 0; k < eqRows.Length; k++)
                             {
                                 if (eqRows[k] == (i + 1))
-                                    for (int j = 0; j < colN+1; j++)
+                                    for (int j = 0; j < colN + 1; j++)
                                     {
                                         matrixMain[i, j] = -matrixMain[i, j];
                                     }
@@ -535,7 +536,7 @@ try
                                 Console.Write(", ");
                             else Console.WriteLine(".");
                         }
-
+                    bool allZero = false;
                     bool protocol = false;
                     Console.WriteLine("\nВивести протокол обчислень? (Y або 1 щоб погодитись)");
                     string proto = Console.ReadLine();
@@ -559,10 +560,12 @@ try
 
                         foreach (int xIndex in freeX)
                         {
+                            allZero = true;
                             for (int i = 0; i < rowN; i++)
                             {
                                 if (Math.Round(matrixMain[i, xIndex - 1], 6) != 0)// Перший ненульовий елемент у стовпчику з вільним x-ом
                                 {
+                                    allZero = false;
                                     if (protocol)
                                     {
                                         Console.WriteLine("Актуальна симплекс-таблиця:");
@@ -647,9 +650,18 @@ try
                                         break;
                                 }
                             }
+                            if (allZero)
+                            {
+                                Console.WriteLine("\nНеможливо видалити вільну змінну X" + xIndex + ": у відповідному стовпчику відсутні ненульові елементи.");
+                                break;
+                            }
                         }
                     }
 
+                    if (allZero)
+                    {
+                        break;
+                    }
                     if (free)
                     {
                         Console.WriteLine("----------------------------------------\nМатриця після видалення вільних змінних:");
@@ -764,13 +776,13 @@ try
                         if (matrixMain[i, colN] < 0)
                         {
                             hasNegative = false;
-                            for (int j = 0; j < colN + 1; j++)
+                            for (int j = 0; j < colN; j++)
                             {
                                 if (matrixMain[i, j] < 0)
                                 {
                                     int processedRow;
 
-                                    // Усунення мінусів в одинарному рядку за допомогою МЖВ для пошуку опорного розв'язку
+                                    // Усунення мінусів в одинарному стовпчику за допомогою МЖВ для пошуку опорного розв'язку
                                     (stepResult, processedRow) = SolutionStepBC(matrixMain, rowN, colN, i, j);
                                     hasNegative = true;
                                     if (!stepResult)

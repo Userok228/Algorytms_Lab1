@@ -1,11 +1,11 @@
 ﻿namespace Lab_1
 {
-    internal class DelElRow
+    internal class ElRow
     {
         double mod;
         char XY;
         int index;
-        public DelElRow(double mod, char XY, int index)
+        public ElRow(double mod, char XY, int index)
         {
             this.mod = mod;
             this.XY = XY;

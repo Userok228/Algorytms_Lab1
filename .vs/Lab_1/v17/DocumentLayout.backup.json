@@ -3,16 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\makro\\source\\repos 3\\2\\Algorytms\\Lab_1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6E341E3E-4EB1-4B06-AEEA-9FD585A8651D}|Lab_1\\Lab_1.csproj|c:\\users\\makro\\source\\repos 3\\2\\algorytms\\lab_1\\lab_1\\delrow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6E341E3E-4EB1-4B06-AEEA-9FD585A8651D}|Lab_1\\Lab_1.csproj|solutionrelative:lab_1\\delrow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6E341E3E-4EB1-4B06-AEEA-9FD585A8651D}|Lab_1\\Lab_1.csproj|c:\\users\\makro\\source\\repos 3\\2\\algorytms\\lab_1\\lab_1\\delelrow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6E341E3E-4EB1-4B06-AEEA-9FD585A8651D}|Lab_1\\Lab_1.csproj|solutionrelative:lab_1\\delelrow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{6E341E3E-4EB1-4B06-AEEA-9FD585A8651D}|Lab_1\\Lab_1.csproj|c:\\users\\makro\\source\\repos 3\\2\\algorytms\\lab_1\\lab_1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6E341E3E-4EB1-4B06-AEEA-9FD585A8651D}|Lab_1\\Lab_1.csproj|solutionrelative:lab_1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E341E3E-4EB1-4B06-AEEA-9FD585A8651D}|Lab_1\\Lab_1.csproj|c:\\users\\makro\\source\\repos 3\\2\\algorytms\\lab_1\\lab_1\\variable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E341E3E-4EB1-4B06-AEEA-9FD585A8651D}|Lab_1\\Lab_1.csproj|solutionrelative:lab_1\\variable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E341E3E-4EB1-4B06-AEEA-9FD585A8651D}|Lab_1\\Lab_1.csproj|c:\\users\\makro\\source\\repos 3\\2\\algorytms\\lab_1\\lab_1\\classdiagram1.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|",
+      "RelativeMoniker": "D:0:0:{6E341E3E-4EB1-4B06-AEEA-9FD585A8651D}|Lab_1\\Lab_1.csproj|solutionrelative:lab_1\\classdiagram1.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E341E3E-4EB1-4B06-AEEA-9FD585A8651D}|Lab_1\\Lab_1.csproj|c:\\users\\makro\\source\\repos 3\\2\\algorytms\\lab_1\\lab_1\\row.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E341E3E-4EB1-4B06-AEEA-9FD585A8651D}|Lab_1\\Lab_1.csproj|solutionrelative:lab_1\\row.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E341E3E-4EB1-4B06-AEEA-9FD585A8651D}|Lab_1\\Lab_1.csproj|c:\\users\\makro\\source\\repos 3\\2\\algorytms\\lab_1\\lab_1\\elrow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E341E3E-4EB1-4B06-AEEA-9FD585A8651D}|Lab_1\\Lab_1.csproj|solutionrelative:lab_1\\elrow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,40 +38,63 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ClassDiagram1.cd",
+              "DocumentMoniker": "C:\\Users\\makro\\source\\repos 3\\2\\Algorytms\\Lab_1\\Lab_1\\ClassDiagram1.cd",
+              "RelativeDocumentMoniker": "Lab_1\\ClassDiagram1.cd",
+              "ToolTip": "C:\\Users\\makro\\source\\repos 3\\2\\Algorytms\\Lab_1\\Lab_1\\ClassDiagram1.cd",
+              "RelativeToolTip": "Lab_1\\ClassDiagram1.cd",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000463|",
+              "WhenOpened": "2026-04-06T14:11:27.979Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "DelRow.cs",
-              "DocumentMoniker": "C:\\Users\\makro\\source\\repos 3\\2\\Algorytms\\Lab_1\\Lab_1\\DelRow.cs",
-              "RelativeDocumentMoniker": "Lab_1\\DelRow.cs",
-              "ToolTip": "C:\\Users\\makro\\source\\repos 3\\2\\Algorytms\\Lab_1\\Lab_1\\DelRow.cs",
-              "RelativeToolTip": "Lab_1\\DelRow.cs",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAYwBMAAAAhAAAAAAAAAA==",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\makro\\source\\repos 3\\2\\Algorytms\\Lab_1\\Lab_1\\Program.cs",
+              "RelativeDocumentMoniker": "Lab_1\\Program.cs",
+              "ToolTip": "C:\\Users\\makro\\source\\repos 3\\2\\Algorytms\\Lab_1\\Lab_1\\Program.cs",
+              "RelativeToolTip": "Lab_1\\Program.cs",
+              "ViewState": "AgIAAJQDAAAAAAAAAAAAAKgDAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-23T13:49:16.149Z",
+              "WhenOpened": "2026-03-15T08:59:16.675Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DelElRow.cs",
-              "DocumentMoniker": "C:\\Users\\makro\\source\\repos 3\\2\\Algorytms\\Lab_1\\Lab_1\\DelElRow.cs",
-              "RelativeDocumentMoniker": "Lab_1\\DelElRow.cs",
-              "ToolTip": "C:\\Users\\makro\\source\\repos 3\\2\\Algorytms\\Lab_1\\Lab_1\\DelElRow.cs",
-              "RelativeToolTip": "Lab_1\\DelElRow.cs",
+              "DocumentIndex": 3,
+              "Title": "Row.cs",
+              "DocumentMoniker": "C:\\Users\\makro\\source\\repos 3\\2\\Algorytms\\Lab_1\\Lab_1\\Row.cs",
+              "RelativeDocumentMoniker": "Lab_1\\Row.cs",
+              "ToolTip": "C:\\Users\\makro\\source\\repos 3\\2\\Algorytms\\Lab_1\\Lab_1\\Row.cs",
+              "RelativeToolTip": "Lab_1\\Row.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-23T13:49:16.149Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ElRow.cs",
+              "DocumentMoniker": "C:\\Users\\makro\\source\\repos 3\\2\\Algorytms\\Lab_1\\Lab_1\\ElRow.cs",
+              "RelativeDocumentMoniker": "Lab_1\\ElRow.cs",
+              "ToolTip": "C:\\Users\\makro\\source\\repos 3\\2\\Algorytms\\Lab_1\\Lab_1\\ElRow.cs",
+              "RelativeToolTip": "Lab_1\\ElRow.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-23T13:44:50.642Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\makro\\source\\repos 3\\2\\Algorytms\\Lab_1\\Lab_1\\Program.cs",
-              "RelativeDocumentMoniker": "Lab_1\\Program.cs",
-              "ToolTip": "C:\\Users\\makro\\source\\repos 3\\2\\Algorytms\\Lab_1\\Lab_1\\Program.cs",
-              "RelativeToolTip": "Lab_1\\Program.cs",
-              "ViewState": "AgIAAP0EAAAAAAAAAAAcwB8FAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "Variable.cs",
+              "DocumentMoniker": "C:\\Users\\makro\\source\\repos 3\\2\\Algorytms\\Lab_1\\Lab_1\\Variable.cs",
+              "RelativeDocumentMoniker": "Lab_1\\Variable.cs",
+              "ToolTip": "C:\\Users\\makro\\source\\repos 3\\2\\Algorytms\\Lab_1\\Lab_1\\Variable.cs",
+              "RelativeToolTip": "Lab_1\\Variable.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADEAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-15T08:59:16.675Z"
+              "WhenOpened": "2026-04-05T07:47:58.822Z"
             }
           ]
         },

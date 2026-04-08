@@ -1,17 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Lab_1.DelElRow">
+  <Class Name="Lab_1.ElRow">
     <Position X="1.25" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAACAAAAAAAQAAAABEAAgAAAAAAAAAAAAAABAAA=</HashCode>
-      <FileName>DelElRow.cs</FileName>
+      <FileName>ElRow.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Lab_1.DelRow">
+  <Class Name="Lab_1.Row">
     <Position X="3" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACIAAAIAAAAAAQAAAAAAAEQAAAACAAAAAAAAAAAAA=</HashCode>
-      <FileName>DelRow.cs</FileName>
+      <FileName>Row.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lab_1.Variable">
+    <Position X="4.75" Y="1.25" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="Lab_1.Variable.VariableType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Variable.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Variable.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

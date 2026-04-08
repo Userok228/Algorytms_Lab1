@@ -1,12 +1,12 @@
 ﻿namespace Lab_1
 {
-    internal class DelRow
+    internal class Row
     {
         int ind;
-        DelElRow[] formula;
+        ElRow[] formula;
         double value;
 
-        public DelRow(int index, DelElRow[] formula)
+        public Row(int index, ElRow[] formula)
         {
             this.ind = index;
             this.formula = formula;
@@ -17,7 +17,7 @@
         {
             return ind;
         }
-        public DelElRow[] GetFormula()
+        public ElRow[] GetFormula()
         {
             return formula;
         }
